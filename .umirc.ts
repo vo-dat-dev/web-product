@@ -6,8 +6,17 @@ export default defineConfig({
   model: {},
   initialState: {},
   request: {},
+  dva: {
+    immer: { enableES5: true },
+  },
   layout: {
     title: '@umijs/max',
+  },
+  locale: {
+    default: 'en-US',
+    antd: true,
+    baseNavigator: true,
+    baseSeparator: '-',
   },
   routes: [
     {
