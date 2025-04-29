@@ -1,13 +1,16 @@
 import ActiveProduct from '@/pages/ProductManagement/components/ActiveProduct';
 import AllProducts from '@/pages/ProductManagement/components/AllProducts';
-import { Tabs, TabsProps } from 'antd';
-import React from 'react';
+import { PlusCircleFilled } from '@ant-design/icons';
+import { useNavigate } from '@umijs/max';
+import { Button, Space, Tabs, TabsProps, Typography } from 'antd';
+import React, { useEffect } from 'react';
 import { connect } from 'umi';
 
 const ProductManagement: React.FC<{ products: any; dispatch: any }> = ({
   products,
   dispatch,
 }) => {
+  const navigate = useNavigate();
   const items: TabsProps['items'] = [
     {
       key: '1',
@@ -35,11 +38,36 @@ const ProductManagement: React.FC<{ products: any; dispatch: any }> = ({
       children: 'Content of Not Yet Posted Tab',
     },
   ];
-  console.log(products);
-  console.log(dispatch);
+  // console.log(products);
+  // console.log(dispatch);
+  useEffect(() => {
+    dispatch({
+      type: 'productManagement/getProducts',
+      payload: {},
+    });
+  }, []);
+  console.log('calling product', products);
 
   return (
     <React.Fragment>
+      <Space
+        align="center"
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: '10px',
+        }}
+      >
+        <Typography style={{ fontSize: '20px', fontWeight: 'bold' }}>
+          Product
+        </Typography>
+        <Button
+          icon={<PlusCircleFilled />}
+          onClick={() => navigate('/product/new')}
+        >
+          Add Product
+        </Button>
+      </Space>
       <Tabs defaultActiveKey="1" items={items} />
     </React.Fragment>
   );

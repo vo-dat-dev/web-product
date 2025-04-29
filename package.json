@@ -3,9 +3,10 @@
   "author": "Võ Tiến <votiendat08112001@gmail.com>",
   "scripts": {
     "build": "max build",
-    "dev": "max dev",
+    "dev": "cross-env NODE_ENV=development max dev",
     "format": "prettier --cache --write .",
     "postinstall": "max setup",
+    "lint": "eslint . --ignore-pattern '!dist/output.js'",
     "prepare": "husky",
     "setup": "max setup",
     "start": "npm run dev"
@@ -14,7 +15,9 @@
     "@ant-design/icons": "^5.0.1",
     "@ant-design/pro-components": "^2.4.4",
     "@umijs/max": "^4.4.10",
-    "antd": "^5.4.0"
+    "antd": "^5.4.0",
+    "cross-env": "^7.0.3",
+    "umi-request": "^1.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.33",

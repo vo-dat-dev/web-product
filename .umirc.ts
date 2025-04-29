@@ -1,13 +1,25 @@
 import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
+  ignore: ['**/ignored-directory/**', '**/*.ignored-file-extension'],
   antd: {},
   access: {},
   model: {},
   initialState: {},
+  define: {
+    // 'process.env.NODE_ENV': process.env.NODE_ENV || 'development',
+    'process.env.DOMAIN_API': process.env.DOMAIN_API || 'development',
+  },
   request: {},
   dva: {
     immer: { enableES5: true },
+  },
+  proxy: {
+    '/api/v1': {
+      target: 'http://localhost:8082',
+      changeOrigin: true,
+      pathRewrite: { '^/': '/' },
+    },
   },
   layout: {
     title: '@umijs/max',
@@ -40,8 +52,14 @@ export default defineConfig({
     },
     {
       name: 'Product Management',
-      path: '/product',
+      path: '/product/all',
       component: './ProductManagement',
+    },
+    {
+      name: 'Create Product',
+      path: '/product/new',
+      layout: false,
+      component: './CreateProduct',
     },
   ],
   npmClient: 'yarn',
