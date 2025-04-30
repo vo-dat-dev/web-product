@@ -1,14 +1,30 @@
 import { getProducts } from '@/services/ProductManagement/ProductManagementController';
+import { AnyAction } from 'redux';
+import { Effect } from 'umi';
 
-const ProductManagement = {
+export interface ProductState {
+  products: any[];
+}
+
+export interface ProductModelType {
+  namespace: 'productManagement';
+  state: ProductState;
+  effects: {
+    getProducts: Effect;
+  };
+  reducers: {
+    saveProducts: (state: ProductState, action: AnyAction) => ProductState;
+  };
+}
+
+const ProductManagementModel: ProductModelType = {
   namespace: 'productManagement',
   state: {
     products: [],
   },
   effects: {
-    *getProducts(_: any, { put, call }: any) {
-      // @ts-ignore
-      const response: any = yield call(getProducts);
+    *getProducts({ payload }, { call, put }) {
+      const response = yield call(getProducts, payload);
       yield put({
         type: 'saveProducts',
         payload: response,
@@ -16,13 +32,13 @@ const ProductManagement = {
     },
   },
   reducers: {
-    saveProducts(state: any, { payload }: any) {
+    saveProducts(state = { products: [] }, { payload }) {
       return {
-        ...state.products,
+        ...state,
         products: payload,
       };
     },
   },
 };
 
-export default ProductManagement;
+export default ProductManagementModel;

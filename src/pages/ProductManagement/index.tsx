@@ -11,6 +11,7 @@ const ProductManagement: React.FC<{ products: any; dispatch: any }> = ({
   dispatch,
 }) => {
   const navigate = useNavigate();
+
   const items: TabsProps['items'] = [
     {
       key: '1',
@@ -19,22 +20,22 @@ const ProductManagement: React.FC<{ products: any; dispatch: any }> = ({
     },
     {
       key: '2',
-      label: `Active`,
+      label: 'Active',
       children: <ActiveProduct />,
     },
     {
       key: '3',
-      label: `Violations`,
+      label: 'Violations',
       children: 'Content of Violations Tab',
     },
     {
       key: '4',
-      label: `Pending Approval by Shopee`,
+      label: 'Pending Approval by Shopee',
       children: 'Content of Pending Approval by Shopee Tab',
     },
     {
       key: '5',
-      label: `Not Yet Posted`,
+      label: 'Not Yet Posted',
       children: 'Content of Not Yet Posted Tab',
     },
   ];

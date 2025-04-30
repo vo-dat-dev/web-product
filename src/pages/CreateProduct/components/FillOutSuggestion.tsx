@@ -1,26 +1,53 @@
-const FillOutSuggestion = () => {
+import { CheckCircleTwoTone } from '@ant-design/icons';
+import { Space, Typography } from 'antd';
+import React from 'react';
+
+const { Text } = Typography;
+
+// Define interface for requirement items
+interface RequirementItem {
+  name: string;
+  completed?: boolean;
+}
+
+const items: RequirementItem[] = [
+  { name: 'Thêm ít nhất 3 hình ảnh', completed: false },
+  { name: 'Thêm video sản phẩm', completed: false },
+  { name: 'Tên sản phẩm có ít nhất 25~100 kí tự', completed: false },
+  {
+    name: 'Thêm ít nhất 100 kí tự hoặc 1 hình ảnh trong mô tả sản phẩm',
+    completed: true,
+  },
+  { name: 'Thêm thương hiệu', completed: false },
+];
+
+const FillOutSuggestion: React.FC = () => {
   return (
-    <div className="flex flex-col gap-2">
-      <h2 className="text-lg font-semibold">Fill out suggestion</h2>
-      <p className="text-sm text-gray-500">
-        Based on the information provided, here are some suggestions to help you
-        fill out the product details:
-      </p>
-      <ul className="list-disc list-inside text-sm text-gray-700">
-        <li>Ensure that the product name is clear and descriptive.</li>
-        <li>
-          Provide a detailed description that highlights the key features and
-          benefits.
-        </li>
-        <li>
-          Include high-quality images that showcase the product from different
-          angles.
-        </li>
-        <li>Set a competitive price based on market research.</li>
-        <li>
-          Consider adding customer reviews or testimonials for social proof.
-        </li>
-      </ul>
+    <div
+      style={{
+        padding: '8px',
+        backgroundColor: '#f0f2f5',
+        borderRadius: '8px',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+        // padding: '32px'
+      }}
+    >
+      <Space direction="vertical">
+        <Typography>Gợi ý điền Thông tin</Typography>
+        {items.map((item: RequirementItem, index: number) => (
+          <Space
+            direction="horizontal"
+            align={'center'}
+            key={index}
+            style={{ width: '100%' }}
+          >
+            <CheckCircleTwoTone
+              twoToneColor={item.completed ? '#52c41a' : '#808080'}
+            />
+            <Text>{item.name}</Text>
+          </Space>
+        ))}
+      </Space>
     </div>
   );
 };

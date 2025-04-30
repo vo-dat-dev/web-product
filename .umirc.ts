@@ -1,15 +1,11 @@
 import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
-  ignore: ['**/ignored-directory/**', '**/*.ignored-file-extension'],
   antd: {},
   access: {},
   model: {},
   initialState: {},
-  define: {
-    // 'process.env.NODE_ENV': process.env.NODE_ENV || 'development',
-    'process.env.DOMAIN_API': process.env.DOMAIN_API || 'development',
-  },
+  define: {},
   request: {},
   dva: {
     immer: { enableES5: true },
