@@ -1,7 +1,7 @@
 import ProductDetailInformation from '@/pages/CreateProduct/components/ProductDetailInformation';
 import PurchaseInformation from '@/pages/CreateProduct/components/PurchaseInformation';
 import ShippingInformation from '@/pages/CreateProduct/components/ShippingInformation';
-import { Space, TabPaneProps, Tabs } from 'antd';
+import { Affix, Button, Space, TabPaneProps, Tabs } from 'antd';
 import React, { MutableRefObject, useRef } from 'react';
 
 // Base Tab interface
@@ -41,6 +41,7 @@ const BasicProductInformation: React.FC = () => {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
+  const [bottom, setBottom] = React.useState<number>(0);
 
   return (
     <div
@@ -89,6 +90,15 @@ const BasicProductInformation: React.FC = () => {
           })}
         </Space>
       </div>
+      <Affix offsetBottom={bottom}>
+        <div
+          style={{ display: 'flex', justifyContent: 'flex-end', width: '100%', gap: '8px' }}
+        >
+          <Button type="primary">Hủy</Button>
+          <Button type="primary">Lưu và ẩn</Button>
+          <Button type="primary">Lưu và hiển thị</Button>
+        </div>
+      </Affix>
     </div>
   );
 };

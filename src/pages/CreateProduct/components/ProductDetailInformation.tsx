@@ -10,7 +10,7 @@ const ProductDetailInformation: React.FC = (props: any) => {
     <React.Fragment>
       <Form
         name="trigger"
-        style={{ maxWidth: 600 }}
+        style={{ maxWidth: '100%' }}
         layout="vertical"
         autoComplete="off"
       >
