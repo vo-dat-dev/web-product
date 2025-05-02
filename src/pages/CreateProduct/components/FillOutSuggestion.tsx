@@ -1,27 +1,21 @@
 import { CheckCircleTwoTone } from '@ant-design/icons';
 import { Space, Typography } from 'antd';
 import React from 'react';
+import { connect } from 'umi';
 
 const { Text } = Typography;
 
 // Define interface for requirement items
-interface RequirementItem {
+export interface RequirementItem {
   name: string;
   completed?: boolean;
 }
 
-const items: RequirementItem[] = [
-  { name: 'Thêm ít nhất 3 hình ảnh', completed: false },
-  { name: 'Thêm video sản phẩm', completed: false },
-  { name: 'Tên sản phẩm có ít nhất 25~100 kí tự', completed: false },
-  {
-    name: 'Thêm ít nhất 100 kí tự hoặc 1 hình ảnh trong mô tả sản phẩm',
-    completed: true,
-  },
-  { name: 'Thêm thương hiệu', completed: false },
-];
-
-const FillOutSuggestion: React.FC = () => {
+const FillOutSuggestion: React.FC<{ requirements: RequirementItem[] }> = ({
+  requirements,
+}: {
+  requirements: RequirementItem[];
+}) => {
   return (
     <div
       style={{
@@ -34,7 +28,7 @@ const FillOutSuggestion: React.FC = () => {
     >
       <Space direction="vertical">
         <Typography>Gợi ý điền Thông tin</Typography>
-        {items.map((item: RequirementItem, index: number) => (
+        {requirements.map((item: RequirementItem, index: number) => (
           <Space
             direction="horizontal"
             align={'center'}
@@ -52,4 +46,6 @@ const FillOutSuggestion: React.FC = () => {
   );
 };
 
-export default FillOutSuggestion;
+export default connect(({ createProduct }: any) => ({
+  requirements: createProduct.requirements,
+}))(FillOutSuggestion);

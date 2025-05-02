@@ -10,12 +10,31 @@ export default defineConfig({
   dva: {
     immer: { enableES5: true },
   },
+  qiankun: {
+    master: {
+      apps: [
+        {
+          name: 'product',
+          entry: '//localhost:8002',
+        },
+        {
+          name: 'authentication',
+          entry: '//localhost:8083',
+        },
+      ],
+    },
+  },
   proxy: {
+    '/api/v1/auth/': {
+      target: 'http://localhost:8083',
+      changeOrigin: true,
+      pathRewrite: { '^/': '/' },
+    },
     '/api/v1': {
       target: 'http://localhost:8082',
       changeOrigin: true,
       pathRewrite: { '^/': '/' },
-    },
+    }
   },
   layout: {
     title: '@umijs/max',
@@ -30,6 +49,11 @@ export default defineConfig({
     {
       path: '/',
       redirect: '/home',
+    },
+    {
+      path: '/login',
+      layout: false,
+      component: './Login',
     },
     {
       name: '首页',

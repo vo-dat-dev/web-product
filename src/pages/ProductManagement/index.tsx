@@ -39,15 +39,13 @@ const ProductManagement: React.FC<{ products: any; dispatch: any }> = ({
       children: 'Content of Not Yet Posted Tab',
     },
   ];
-  // console.log(products);
-  // console.log(dispatch);
+
   useEffect(() => {
     dispatch({
       type: 'productManagement/getProducts',
       payload: {},
     });
   }, []);
-  console.log('calling product', products);
 
   return (
     <React.Fragment>

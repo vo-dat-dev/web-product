@@ -2,7 +2,9 @@ import ProductDetailInformation from '@/pages/CreateProduct/components/ProductDe
 import PurchaseInformation from '@/pages/CreateProduct/components/PurchaseInformation';
 import ShippingInformation from '@/pages/CreateProduct/components/ShippingInformation';
 import { Affix, Button, Space, TabPaneProps, Tabs } from 'antd';
-import React, { MutableRefObject, useRef } from 'react';
+import React, { MutableRefObject, useEffect, useRef } from 'react';
+import { connect } from 'umi';
+import { hashString } from '@umijs/preset-umi/dist/features/ssr/builder/css-loader';
 
 // Base Tab interface
 export interface Tab extends Omit<TabPaneProps, 'tab'> {
@@ -32,7 +34,7 @@ const items: CustomTab[] = [
     component: <ShippingInformation />,
   },
 ];
-const BasicProductInformation: React.FC = () => {
+const BasicProductInformation: React.FC<{dispatch: any}> = ( {dispatch}) => {
   const storageRef: MutableRefObject<Record<string, HTMLDivElement | null>> =
     useRef({});
   const scrollToItem = (key: string) => {
@@ -102,4 +104,6 @@ const BasicProductInformation: React.FC = () => {
     </div>
   );
 };
-export default BasicProductInformation;
+export default connect(({ createProduct }: any) => ({
+  requirements: createProduct.requirements,
+}))(BasicProductInformation);

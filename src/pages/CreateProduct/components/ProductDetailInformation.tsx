@@ -28,7 +28,7 @@ const ProductDetailInformation: React.FC = (props: any) => {
           hasFeedback
           label="Mô tả sản phẩm"
           name="description"
-          rules={[{ max: 3 }]}
+          rules={[{ min: 3 }]}
         >
           <TextArea rows={4} />
         </Form.Item>

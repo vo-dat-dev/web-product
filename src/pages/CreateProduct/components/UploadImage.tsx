@@ -1,7 +1,8 @@
 import { PlusOutlined } from '@ant-design/icons';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
 import { Image, Upload } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { connect } from 'umi';
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
@@ -13,7 +14,7 @@ const getBase64 = (file: FileType): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-const UploadImage: React.FC = () => {
+const UploadImage: React.FC<{ dispath: any }> = ({ dispatch }: any) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -36,6 +37,24 @@ const UploadImage: React.FC = () => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </button>
   );
+
+  const numberOfImages = useMemo(() => {
+    return fileList.length;
+  }, [fileList]);
+
+  useEffect(() => {
+    if (fileList.length >= 3) {
+      dispatch({
+        type: 'createProduct/activeCheckWithRequirement',
+        payload: { name: 'Thêm ít nhất 3 hình ảnh' },
+      });
+    } else {
+      dispatch({
+        type: 'createProduct/disActiveCheckWithRequirement',
+        payload: { name: 'Thêm ít nhất 3 hình ảnh' },
+      });
+    }
+  }, [numberOfImages]);
   return (
     <>
       <Upload
@@ -62,4 +81,6 @@ const UploadImage: React.FC = () => {
   );
 };
 
-export default UploadImage;
+export default connect(({ createProduct }: any) => ({
+  requirements: createProduct.requirements,
+}))(UploadImage);
