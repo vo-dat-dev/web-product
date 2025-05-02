@@ -34,7 +34,7 @@ export default defineConfig({
       target: 'http://localhost:8082',
       changeOrigin: true,
       pathRewrite: { '^/': '/' },
-    }
+    },
   },
   layout: {
     title: '@umijs/max',
@@ -55,21 +55,21 @@ export default defineConfig({
       layout: false,
       component: './Login',
     },
-    {
-      name: '首页',
-      path: '/home',
-      component: './Home',
-    },
-    {
-      name: '权限演示',
-      path: '/access',
-      component: './Access',
-    },
-    {
-      name: ' CRUD 示例',
-      path: '/table',
-      component: './Table',
-    },
+    // {
+    //   name: '首页',
+    //   path: '/home',
+    //   component: './Home',
+    // },
+    // {
+    //   name: '权限演示',
+    //   path: '/access',
+    //   component: './Access',
+    // },
+    // {
+    //   name: ' CRUD 示例',
+    //   path: '/table',
+    //   component: './Table',
+    // },
     {
       name: 'Product Management',
       path: '/product/all',
@@ -80,6 +80,11 @@ export default defineConfig({
       path: '/product/new',
       layout: false,
       component: './CreateProduct',
+    },
+    {
+      path: '/*',
+      component: './404',
+      layout: false,
     },
   ],
   npmClient: 'yarn',

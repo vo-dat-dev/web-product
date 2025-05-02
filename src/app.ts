@@ -12,7 +12,7 @@ export async function getInitialState(): Promise<{ name: string }> {
 
 export const layout: RunTimeLayoutConfig = () => {
   return {
-    title: 'Ant Design',
+    title: 'Trending',
     logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
     menu: {
       locale: false,

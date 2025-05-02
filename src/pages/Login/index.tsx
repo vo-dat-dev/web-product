@@ -3,6 +3,7 @@ import { Button, Checkbox, Form, FormProps, Input, message } from 'antd';
 import React from 'react';
 import { history } from 'umi';
 import { ResponseError } from 'umi-request';
+// import { logger } from '@umijs/utils';
 
 type FieldType = {
   username?: string;
@@ -16,12 +17,12 @@ const Login: React.FC = () => {
     authentication(values)
       .then((response: any) => {
         history.push('/home')
-        messageApi.success('Đăng nhập thành công').then((r) => console.log(r));
-        console.log(response)
+        messageApi.success('Đăng nhập thành công').then((r) => logger.error(r));
+        logger.info(response)
       })
       .catch((error: ResponseError) => {
         console.log('calling error', error);
-        messageApi.error(error.message).then((r) => console.log(r));
+        messageApi.error(error.message).then((r) => logger.error(r));
       })
       .finally(() => {});
   };
@@ -45,8 +46,6 @@ const Login: React.FC = () => {
       <Form
         layout="vertical"
         name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
         style={{
           width: '100%',
           maxWidth: 300,
@@ -89,7 +88,7 @@ const Login: React.FC = () => {
 
         <Form.Item label={null} style={{ width: '100%' }}>
           <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
-            Submit
+            Login
           </Button>
         </Form.Item>
       </Form>

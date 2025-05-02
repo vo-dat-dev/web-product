@@ -3,7 +3,7 @@
   "author": "Võ Tiến <votiendat08112001@gmail.com>",
   "scripts": {
     "build": "HUSKY=0 max build",
-    "dev": "cross-env NODE_ENV=development HUSKY=0 max dev",
+    "dev": "cross-env NODE_ENV=development  HUSKY=0 max dev",
     "format": "prettier --cache --write .",
     "postinstall": "max setup",
     "lint": "eslint . --ignore-pattern '!dist/output.js'",
@@ -25,6 +25,7 @@
     "moment": "^2.30.1",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.5",
+    "thread-stream": "^3.1.0",
     "umi-request": "^1.4.0"
   },
   "devDependencies": {
